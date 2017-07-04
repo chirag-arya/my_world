@@ -1,0 +1,146 @@
+.container
+  .row
+    .col-lg-9
+      %h1.page-header
+        Profile
+        %small details
+    .col-lg-3
+      %h1.page-header
+        = link_to "Edit Details", edit_user_profile_path(@profile), class: 'btn btn-primary'
+  = form_for [:user, @profile] do |f|
+    .row
+      .col-md-8
+        - if @profile.image1.present?
+          = link_to user_profile_path(@profile, img: "image_1"), method: :delete, data: { confirm: 'Are you sure?' }, :class => "glyphicon glyphicon-remove" do
+            %span
+          = image_tag @profile.image1, :class => "img-responsive", :id => "image1"
+        - else
+          = image_tag 'http://placehold.it/750x500', :class => "img-responsive", :id => "image1"
+        = f.file_field :image1, :id => "my_file1", onchange: "this.form.submit();", :style => "display: none;"
+      .col-md-4
+        %h3 About Me
+        %p
+          .div.comment.more
+            = @profile.about.present? ? @profile.about : "You have not mentioned anything about you."
+        %h3 Primary address
+        %ul
+          %li
+            = @profile.address1.present? ? @profile.address1 : "Edit your profile to add necessary details about you."
+        %h3 Secondary address
+        %ul
+          %li
+            = @profile.address2.present? ? @profile.address2 : "Edit your profile to add necessary details about you."
+        %h3 Relationship status
+        %ul
+          %li
+            = @profile.relationship_status.present? ? @profile.relationship_status : "Single"
+    .row
+      .col-lg-12
+        %h3.page-header Album Description
+        Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo 
+    .row
+      .col-lg-12
+        %h3.page-header User album.
+      .col-sm-3.col-xs-6
+        - if @profile.image2.present?
+          = link_to user_profile_path(@profile, img: "image_2"), method: :delete, data: { confirm: 'Are you sure?' }, :class => "glyphicon glyphicon-remove" do
+            %span
+          = image_tag @profile.image2, :class => "img-responsive", :id => "image2"
+        - else
+          = image_tag 'http://placehold.it/500x300', :class => "img-responsive", :id => "image2"
+        = f.file_field :image2, :id => "my_file2", onchange: "this.form.submit();", :style => "display: none;"
+      .col-sm-3.col-xs-6
+        = link_to root_path, :class => "glyphicon glyphicon-remove" do
+          %span
+        %img.img-responsive.portfolio-item{:alt => "", :src => "http://placehold.it/500x300"}/
+      .col-sm-3.col-xs-6
+        = link_to root_path, :class => "glyphicon glyphicon-remove" do
+          %span
+        %img.img-responsive.portfolio-item{:alt => "", :src => "http://placehold.it/500x300"}/
+      .col-sm-3.col-xs-6
+        = link_to root_path, :class => "glyphicon glyphicon-remove" do
+          %span
+        %img.img-responsive.portfolio-item{:alt => "", :src => "http://placehold.it/500x300"}/
+
+/ To show image as pop up on click
+/ = link_to image_tag(@profile.image.url(:large)), @profile.image.url(:original), :popup=>['original_image', 'height=700,width=900']
+
+
+/ :javascript
+/   $("input[name='file_1']").change(function() { this.form.submit(); });
+:javascript
+  $("#image1").click(function() {
+    $("input[id='my_file1']").click();
+  });
+
+  $("#image2").click(function() {
+    $("input[id='my_file2']").click();
+  });
+
+  $("#image3").click(function() {
+    $("input[id='my_file3']").click();
+  });
+
+  $("#image4").click(function() {
+    $("input[id='my_file4']").click();
+  });
+
+  $("#image5").click(function() {
+    $("input[id='my_file5']").click();
+  });
+
+  $(document).ready(function() {
+    var showChar = 100;
+    var ellipsestext = "...";
+    var moretext = "more";
+    var lesstext = "less";
+    $('.more').each(function() {
+      var content = $(this).html();
+
+      if(content.length > showChar) {
+
+        var c = content.substr(0, showChar);
+        var h = content.substr(showChar-1, content.length - showChar);
+
+        var html = c + '<span class="moreellipses">' + ellipsestext+ '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
+
+        $(this).html(html);
+      }
+
+    });
+
+    $(".morelink").click(function(){
+      if($(this).hasClass("less")) {
+        $(this).removeClass("less");
+        $(this).html(moretext);
+      } else {
+        $(this).addClass("less");
+        $(this).html(lesstext);
+      }
+      $(this).parent().prev().toggle();
+      $(this).prev().toggle();
+      return false;
+    });
+  });
+
+:css
+  #image1 {
+    max-height: 500px;
+    width: 700px;
+  }
+  / a {
+  /   color: #0254EB
+  / }
+  / a:visited {
+  /   color: #0254EB
+  / }
+  a.morelink {
+    text-decoration:none;
+    outline: none;
+  }
+  .morecontent span {
+    display: none;
+  }
+  .comment {
+    width: 400px;
+  }

@@ -1,0 +1,22 @@
+%h1= @chat_room.title
+#messages{"data-chat-room-id" => "#{@chat_room.id}"}
+  = render @chat_room.messages
+
+= form_for @message, url: '#' do |f|
+  .form-group
+    = f.label :body
+    = f.text_area :body, class: 'form-control text_ar'
+    %small.text-muted From 2 to 1000 characters
+  = f.submit "Post", class: 'btn btn-primary btn-lg hi', :id => "sbmt_btn"
+
+:javascript
+  $(document).ready(function(){  
+    $(".text_ar").keypress(function(){
+      if ($(".text_ar").val().length > 0) {
+        $("#sbmt_btn").removeAttr('disabled');
+      }
+      else if ($(".text_ar").val().length == 0){
+        $("#sbmt_btn").attr('disabled','disabled');
+      }
+    });
+  })

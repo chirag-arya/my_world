@@ -1,0 +1,15 @@
+.card
+  .card-block
+    .row
+      .col-md-1
+        - if message.user.profile.present? and message.user.profile.image.present?
+          = image_tag message.user.profile.image.url(:thumb)
+        - else
+          = gravatar_for message.user
+      .col-md-11
+        %p.card-text
+          %span.text-muted
+            = message.user.name
+            at #{message.timestamp} says
+          %br/
+          = message.body
