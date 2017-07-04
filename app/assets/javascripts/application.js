@@ -17,5 +17,6 @@
 //= require zxcvbn
 //= require global
 //= require cable
+//= require video_rooms.js
 //= require turbolinks
 //= require_tree .

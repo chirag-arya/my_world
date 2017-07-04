@@ -6,3 +6,10 @@ development:
   pool: 5
   username: root
   password: password
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: myworld_development
+  pool: 5
+  username: pguser
+  password: password

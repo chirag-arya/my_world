@@ -54,9 +54,8 @@ class User::ProfilesController < ApplicationController
     redirect_to user_profiles_path
   end
 
-
   private
-
+  
   def profile_params
     params.require(:profile).permit!
   end

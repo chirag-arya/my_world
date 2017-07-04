@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable, :zxcvbnable
 
   has_many :chat_rooms, dependent: :destroy
+  has_many :video_rooms, dependent: :destroy
   has_many :messages, dependent: :destroy
   has_one :profile, dependent: :destroy
 

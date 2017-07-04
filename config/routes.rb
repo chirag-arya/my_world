@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  # root :to => "video_rooms#index"
+  resources :video_rooms
+  match '/party/:id', :to => "video_rooms#party", :as => :party, :via => :get
+
   devise_for :users
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :chat_rooms, only: [:new, :create, :show, :index]
-	root 'chat_rooms#index'
+	root 'chat_rooms#index' #unable from somewhere
 
   namespace :user do
     resources :profiles

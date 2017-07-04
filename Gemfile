@@ -13,6 +13,7 @@ gem 'haml'
 gem 'bootstrap-sass'
 gem 'devise_zxcvbn'
 gem "paperclip"
+gem "opentok", "~> 2.4.1"
 
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
